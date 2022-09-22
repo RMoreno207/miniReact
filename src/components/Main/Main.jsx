@@ -1,9 +1,24 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Home from './Home';
+import Form from './Form';
+import ListNews from './Home/ListNews';
+import NotFound from '../NotFound';
 
-class Main extends Component {
+
+export class Main extends Component {
   render() {
-    return <div>Main</div>;
+    return (
+      <main className="main">
+        <Routes>
+          <Route element={<Home />} path={"/home"} />
+          <Route element={<Form />} path={"/form"} />
+          <Route element={<ListNews />} path={"/list"} />
+          <Route element={<NotFound />} path={"/*"} />
+        </Routes>
+      </main>
+    )
   }
 }
 
-export default Main;
+export default Main

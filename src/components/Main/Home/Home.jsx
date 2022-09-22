@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import ListNews from './ListNews';
 
 class Home extends Component {
   render() {
-    return <div>Home</div>;
+    return <div>
+      Input + botón para introducir nombre de usuario
+    </div>;
   }
 }
 
