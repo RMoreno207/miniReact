@@ -1,38 +1,53 @@
 import React, { Component } from "react";
+import axios from "axios"; //Fetch
 import { v4 as uuidv4 } from 'uuid';
 import img3 from "../../../assets/img3.jpg";
 import "./ListNews.css";
 import Card from "./Card/Card";
 import data from './news.json'
 
-class ListNews extends Component {
+
+export class ListNews extends Component {
   constructor(props) {
     super(props)
 
-    this.image = React.createRef(); // referencia a la URL imágen
-    this.suggestion = React.createRef(); // referencia a la sugerencia
-
     this.state = {
-      news: data,
-      suggestion: ""
+      theNews: []
     }
   }
 
-  paintNews = () => this.state.news.map((newCard, i) => <Card data={newCard} key={uuidv4()} delete={() => this.deleteProduct(i)} />)
+  async componentDidMount() {
+    // const apiKey = process.env.REACT_APP_API_KEY;
+    const apiKey = "rt0z7qOSKK2pOyK6ItKdc7dfw84lMvar";
+    console.log(apiKey);
+    const res = await axios(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Economy&api-key=${apiKey}`);
+    const dataSlice = await res.data.response.docs.slice(0, 5);
+    console.log(dataSlice);
+    // const newsAndFetch = [...dataSlice]
 
-  deleteProduct = (i) => {
+    this.setState({
+      theNews: dataSlice
+    })
+  }
+
+
+
+  // paintNews = () => this.state.news.map((newCard, i) => <Card data={newCard} key={uuidv4()} delete={() => this.deleteProduct(i)} />)
+
+  deleteNews = (i) => {
     //filter
-    const remainingCards = this.state.news.filter((newCard, j) => i !== j);
-    this.setState({ news: remainingCards });
+    const remainingCards = this.state.theNews.filter((newCard, j) => i !== j);
+    this.setState({ theNews: remainingCards });
   }
 
   render() {
+    const allNews = this.state.theNews;
     return (
       <section>
         <h1>There are the NEWS!!</h1>
         <img src={img3} className="img3" alt="img3" />
-        {this.paintNews()}
-        Haz una precarga de 5 noticias de la API + las que has dado de alta. Tu eliges el topic
+        {/* {this.paintNews()} */}
+        {allNews.map((news, i) => <Card news={news} delete={() => this.deleteNews(i)} key={uuidv4()} />)}
       </section>
     )
   }

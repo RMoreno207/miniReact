@@ -36,7 +36,7 @@ class Home extends Component {
       <div>
         <h1>Welcome to the best News APP!!</h1>
         <img src={img1} className="img1" alt="img1" />
-        <div>
+        <div className="user">
           <h2>Introduce tu nombre de usuario</h2>
           <input type="text" placeholder="Pepe" ref={this.user} onChange={this.handleChange} />
           <button onClick={this.sendUser}>Login</button>

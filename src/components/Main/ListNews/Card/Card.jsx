@@ -5,16 +5,16 @@ export class Card extends Component {
     super(props)
   }
   render() {
-    const { abstract, lead_paragraphfo, source } = this.props.data;
+    console.log(this.props);
+    const { abstract, lead_paragraph } = this.props.news;
     return (
       <article className="product-item" >
-        <div>
-          <h3>{abstract}</h3>
-          <p>{lead_paragraphfo}</p>
-          <h4>{source}</h4>
+        <div className="card">
+          <h2>{abstract}</h2>
+          <p>{lead_paragraph}</p>
         </div>
         <div>
-          <button variant="contained" size="small" >Delete</button>
+          <button className="btn" onClick={this.props.delete} >Delete</button>
         </div>
       </article>
     )

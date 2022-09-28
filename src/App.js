@@ -8,10 +8,13 @@ import Footer from './components/Footer';
 
 //Context
 import { userContext } from './context/userContext';
+import { newsContext } from './context/newsContext';
 
 function App() {
-  // state para componente funcional
+  // state para componente funcional usuario
   const [user, setUser] = useState("");
+  // state para componente funcional news
+  const [news, setNews] = useState({});
 
   //Variables de usuario
   const login = (name) => setUser(name); // user = name. Ej. name="Guille" --> user="Guille"
@@ -24,12 +27,22 @@ function App() {
     logout
   }
 
+  //variables para news
+  const addNews = (news) => setNews(news);
+
+  //funcion para news
+  const dataNews = {
+    news, addNews
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <userContext.Provider value={data}>
           <Header />
-          <Main />
+          <newsContext.Provider value={dataNews}>
+            <Main />
+          </newsContext.Provider>
           <Footer />
         </userContext.Provider>
       </BrowserRouter>
