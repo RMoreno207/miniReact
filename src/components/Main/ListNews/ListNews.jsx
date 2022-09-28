@@ -4,6 +4,7 @@ import img3 from "../../../assets/img3.jpg";
 import "./ListNews.css";
 import Card from "./Card/Card";
 import data from './news.json'
+
 class ListNews extends Component {
   constructor(props) {
     super(props)
